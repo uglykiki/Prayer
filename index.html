@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/aframe-v0.8.2.min.js"></script>
+    <script src="js/aframe-effects.min.js"></script>
+    <script src="js/aframe-particle-system-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+    <title></title>
+</head>
+
+<script>
+    require('aframe-effects')
+</script>
+
+<body>
+    <a-scene effects="bloom, fxaa" bloom="radius: 0.8" fxaa>
+        <!-- 360 background-->
+        <a-sky src="assets/temple3.jpg" rotation="0 90 0"> </a-sky>
+      
+        <!-- add light-->
+        <a-entity light="type: directional; color: red; intensity: 0.8" position="0 -3 3"></a-entity>
+        <a-entity light="type: directional; color: white; intensity: 1" position="0 -3 20"></a-entity>
+        
+        <!-- add Cursor-->
+        <a-entity camera look-controls>
+        <a-cursor id="cursor" position="0 0 -1" color="white" raycaster="objects: .clickable">
+            <a-animation begin="mouseenter" attribute="color" from="white" to="springgreen" dur="50"></a-animation>
+            <a-animation begin="mouseleave" attribute="color" from="springgreen" to="white" ></a-animation>
+            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="50"></a-animation>
+        </a-cursor>
+        </a-entity>
+        
+        <!-- add soundtrack-->
+        <a-sound src="src: url(assets/sound/wind.wav)" autoplay="true" position="0 5 5" loop="true" ></a-sound>
+<!--
+        <a-curvedimage 
+            src="assets/charm-2.png"
+            height="40.0"
+            visible="false"
+            radius="35"
+            theta-length="360"
+            rotation="0 0 0"
+            position="0 0 0"
+            scale="0.1 0.1 0.1"
+            material="opacity:0.4">
+            <a-animation attribute="visible" to="true" repeat="indefinite"></a-animation>
+            <a-animation attribute="rotation" dur="3000" to="0 360 0" begin="click"></a-animation>
+        </a-curvedimage>
+        
+-->
+         <!-- add 3D Model use asset manager-->
+        <a-assets>
+        <a-asset-item id="hand-obj" src="assets/model/prayerhand_color.obj" ></a-asset-item>
+        </a-assets>
+        <a-obj-model
+            class="clickable"
+            src="#hand-obj"
+            scale="2.2 2.2 2.2"
+            position="-3 -6 -6"
+            rotation="0 0 0"
+            material="flat: shader; src: assets/hand-texture.jpg; repeat: 2 2"
+            sound="on: click; src: assets/sound/pray.mp3">
+            <a-animation attribute="rotation" dur="3000" to="25 0 0"  begin="click" repeat="indefinite"></a-animation>
+        </a-obj-model>
+        
+         <!--- add leave link--->
+        <a-entity 
+            class="clickable"
+            link="on: click; href: https://aframe-aincraft.glitch.me"
+            visible="false"
+            position="-5 1 -6">
+        </a-entity>
+        <a-entity
+            class="clickable"
+            link="on: click; href: https://aframe-aincraft.glitch.me"
+            visible="false"
+            position="5 1 -6">
+        </a-entity>
+        
+        <!--- add backdoor alert--->
+        <a-entity
+            class="clickable"
+            geometry="primitive: box; height: 4; width: 8"
+            visible="false"
+            position="0 9 -20"
+            sound="on: click; src: assets/sound/leave.mp3; volume: 5">
+        </a-entity>
+        
+<!--
+        <a-entity link="on: click; href: theater.html; title:Fontune of Romance; image: assets/golden-texture.jpg"
+        position="-4 -4 5.5"
+        rotation="65 0 0"></a-entity>
+        <a-entity link="on: click; href: theater.html; title:Fontune of Wealth" 
+        position="0 -4 5.5"
+        rotation="65 0 0"></a-entity>
+        <a-entity link="on: click; href: theater.html; title:Fontune of Well-being" 
+        position="4 -4 5.5"
+        rotation="65 0 0"></a-entity>
+-->
+        <!--- add octahadron--->
+        <a-entity
+            class="clickable"
+            geometry="primitive: octahedron; height:1; width:1;"
+            rotation="0 0 0"
+            position="-3 0 8"
+            material="shader:flat; src: assets/love-texture.jpg; repeat: 4 2">
+            <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+        </a-entity>
+        
+        <a-entity
+            class="clickable"
+            geometry="primitive: octahedron; height:1; width:1;"
+            position="3 0 8"
+            rotation="0 0 0"
+            material="shader:flat; src: assets/money-texture.jpg; repeat: 4 2">
+            <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+        </a-entity>
+        
+        <a-entity
+            class="clickable"
+            geometry="primitive: octahedron; height:1; width:1;"
+            position="0 3 8"
+            rotation="0 0 0 "
+            material="shader:flat; src: assets/life-texture.jpg; repeat: 4 2">
+            <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+        </a-entity>
+        
+        
+        <!--- add fire--->
+        <a-entity 
+            position="0 -2 15"
+            particle-system="color: red, yellow; 
+            maxAge: 0.1;
+            size: 1;
+            rotationAngle: -30;
+            randomize: true;
+            particleCount: 50;
+            texture: assets/smokeparticle.png">
+            <a-animation attribute="rotation" dur="3000" to="0 360 0" repeat="indefinite"></a-animation>
+        </a-entity>
+         <!--- add rain--->
+<!--
+        <a-entity 
+            position="0 -4 50"
+            particle-system="preset: rain;
+            texture: assets/sky.png;
+            maxAge: 1">
+        </a-entity>
+        
+-->
+        
+<!--
+        <a-entity 
+            position="-30 -4 -40"
+            rotation="90 0 0"
+            particle-system="preset: color;
+            color: white, black;
+            velocityValue: 1, 0.3, 1;
+            velocitySpread: 1, 1, 1;
+            rotationAxis:60;
+            rotationAngle: 90;
+            particleCount:100;
+            texture: assets/cloudSml.png;
+            maxAge: 5">
+        </a-entity>
+-->
+      
+        <!--- add dust--->
+        <a-entity 
+            position="0 -4 -10"
+            rotation="90 0 0"
+            particle-system="preset: snow;
+            maxAge: 2;
+            particleCount: 800;
+            rotationAngle: -30;
+            texture: assets/sky.png;">
+        </a-entity>
+        
+        
+        <!--- add fire music--->
+        <a-entity
+        class="clickable"
+        visible="false"
+        geometry="primitive: box; height: 3; width: 3"
+        position="0 -3 15"
+        sound="on: click; src: assets/sound/bell.wav; volume: 3">
+        </a-entity>
+
+    </a-scene>
+</body>
+</html>
+
+
+
