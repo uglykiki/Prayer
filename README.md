@@ -10,7 +10,7 @@ Visti here>> https://uglykiki.github.io/VRspace/
 ## Resource
 1. WebVR : [A-Frame](http://aframe.io)
 2. Sound library: [freesound.org](https://freesound.org/)
-3. Panorama images: [Google Street View](https://istreetview.com/)
+3. Panorama images: [Google Street View](https://svd360.istreetview.com/)
 
 ![screenshot](/assets/screenshot/vr-screenshot3.png)
 
