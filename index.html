@@ -11,14 +11,21 @@
     <title></title>
 </head>
 
-<script>
-    require('aframe-effects')
-</script>
+
 
 <body>
-    <a-scene effects="bloom, fxaa" bloom="radius: 0.8" fxaa>
+    <a-scene effects="bloom, fxaa" bloom="radius: 0.5" fxaa>
+        
+        <!-- asset-->
+        <a-asset>
+            <img id="sky" src="assets/temple.jpg">
+            <a-asset-item id="hand-obj" src="assets/model/prayerhand_color.obj" ></a-asset-item>
+            <a-asset-item id="hand-texture" src="assets/hand-texture.jpg"></a-asset-item>
+            <audio id="bgsound" src="assets/sound/wind.wav"></audio>
+        </a-asset>
+        
         <!-- 360 background-->
-        <a-sky src="assets/temple3.jpg" rotation="0 90 0"> </a-sky>
+        <a-sky src="#sky" rotation="0 90 0"></a-sky>
       
         <!-- add light-->
         <a-entity light="type: directional; color: red; intensity: 0.8" position="0 -3 3"></a-entity>
@@ -34,7 +41,7 @@
         </a-entity>
         
         <!-- add soundtrack-->
-        <a-sound src="src: url(assets/sound/wind.wav)" autoplay="true" position="0 5 5" loop="true" ></a-sound>
+        <a-sound src="#bgsound" autoplay="true" position="0 0 3" loop="true"></a-sound>
 <!--
         <a-curvedimage 
             src="assets/charm-2.png"
@@ -52,17 +59,15 @@
         
 -->
          <!-- add 3D Model use asset manager-->
-        <a-assets>
-        <a-asset-item id="hand-obj" src="assets/model/prayerhand_color.obj" ></a-asset-item>
-        </a-assets>
         <a-obj-model
+            id="hand"
             class="clickable"
             src="#hand-obj"
             scale="2.2 2.2 2.2"
             position="-3 -6 -6"
             rotation="0 0 0"
-            material="flat: shader; src: assets/hand-texture.jpg; repeat: 2 2"
-            sound="on: click; src: assets/sound/pray.mp3">
+            material="src: #hand-texture; flat: shader; ; repeat: 2 2"
+            sound="on: click; src: assets/sound/flame.wav; loop: true; volume: 6">
             <a-animation attribute="rotation" dur="3000" to="25 0 0"  begin="click" repeat="indefinite"></a-animation>
         </a-obj-model>
         
@@ -73,7 +78,7 @@
             visible="false"
             position="-5 1 -6">
         </a-entity>
-        <a-entity
+        <a-entity 
             class="clickable"
             link="on: click; href: https://aframe-aincraft.glitch.me"
             visible="false"
@@ -101,7 +106,8 @@
         rotation="65 0 0"></a-entity>
 -->
         <!--- add octahadron--->
-        <a-entity
+        <a-entity id="leftBox"
+            visible="false"
             class="clickable"
             geometry="primitive: octahedron; height:1; width:1;"
             rotation="0 0 0"
@@ -110,7 +116,8 @@
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
         </a-entity>
         
-        <a-entity
+        <a-entity id="centerBox"
+            visible="false"
             class="clickable"
             geometry="primitive: octahedron; height:1; width:1;"
             position="3 0 8"
@@ -119,8 +126,9 @@
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
         </a-entity>
         
-        <a-entity
+        <a-entity id="rightBox"
             class="clickable"
+            visible="false"
             geometry="primitive: octahedron; height:1; width:1;"
             position="0 3 8"
             rotation="0 0 0 "
@@ -130,8 +138,9 @@
         
         
         <!--- add fire--->
-        <a-entity 
+        <a-entity id="fire"
             position="0 -2 15"
+            visible="false"
             particle-system="color: red, yellow; 
             maxAge: 0.1;
             size: 1;
@@ -141,37 +150,12 @@
             texture: assets/smokeparticle.png">
             <a-animation attribute="rotation" dur="3000" to="0 360 0" repeat="indefinite"></a-animation>
         </a-entity>
-         <!--- add rain--->
-<!--
-        <a-entity 
-            position="0 -4 50"
-            particle-system="preset: rain;
-            texture: assets/sky.png;
-            maxAge: 1">
-        </a-entity>
         
--->
-        
-<!--
-        <a-entity 
-            position="-30 -4 -40"
-            rotation="90 0 0"
-            particle-system="preset: color;
-            color: white, black;
-            velocityValue: 1, 0.3, 1;
-            velocitySpread: 1, 1, 1;
-            rotationAxis:60;
-            rotationAngle: 90;
-            particleCount:100;
-            texture: assets/cloudSml.png;
-            maxAge: 5">
-        </a-entity>
--->
-      
-        <!--- add dust--->
-        <a-entity 
+        <!--- add snow--->
+        <a-entity id="snow"
             position="0 -4 -10"
             rotation="90 0 0"
+            visible="false"
             particle-system="preset: snow;
             maxAge: 2;
             particleCount: 800;
@@ -179,17 +163,46 @@
             texture: assets/sky.png;">
         </a-entity>
         
-        
-        <!--- add fire music--->
-        <a-entity
-        class="clickable"
-        visible="false"
-        geometry="primitive: box; height: 3; width: 3"
-        position="0 -3 15"
-        sound="on: click; src: assets/sound/bell.wav; volume: 3">
+        <!--- add censer music--->
+        <a-entity id="censer"
+            class="clickable"
+            visible="false"
+            geometry="primitive: box; height: 2; width: 2"
+            position="0 0 10"
+            sound="on: click; src: assets/sound/bell.wav; volume: 3">
         </a-entity>
 
     </a-scene>
+    
+    <script>
+    var hand = document.querySelector ( '#hand');
+    var fire = document.querySelector ( '#fire');
+    var censer = document.querySelector ( '#censer');
+    var rightBox = document.querySelector ( '#rightBox');
+    var centerBox = document.querySelector ( '#centerBox');
+    var leftBox = document.querySelector ( '#leftBox');
+    var snow = document.querySelector ( '#snow');
+   
+    hand.addEventListener ( "click", function( )
+    {
+        fire.setAttribute ( "visible",{visibility: true});
+        console.log ('#censer')
+        
+    }) 
+        
+    censer.addEventListener ( "click", function( )
+    {
+        snow.setAttribute ( "visible",{ visibility: true});
+        rightBox.setAttribute ( "visible",{ visibility: true});
+        leftBox.setAttribute ( "visible",{ visibility: true});
+        centerBox.setAttribute ( "visible",{ visibility: true})
+    })
+    
+    //aframe-effect
+    require('aframe-effects')
+
+    </script>
+    
 </body>
 </html>
 
