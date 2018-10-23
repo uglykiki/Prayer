@@ -31,10 +31,6 @@
         </a-assets>
         <a-sky src="#sky" rotation="0 -90 5" ></a-sky>
         
-        <!-- load video-->
-        <a-video src="#movie" width="16" height="9" position="0 -3 -20" rotation="-15 0 0"></a-video>
-        <a-video src="assets/moderat.mp4"></a-video>
-        
         <!-- add cursor-->
         <a-entity camera look-controls>
         <a-cursor id="cursor" position="0 0 -1" color="white" raycaster="objects: .clickable">
@@ -43,12 +39,11 @@
             <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="50"></a-animation>
         </a-cursor>
         </a-entity>
-
         
-        <a-text font="kelsonsans" value="[Run away like a jerk]" align="center" width="2" position="-4 1 -0.5" rotation="0 80 -5"></a-text>
-        <a-text font="kelsonsans" value="[Run away like a jerk]" align="center" width="2" position="4 1 -0.5" rotation="0 -80 0"></a-text>
-        <a-text font="kelsonsans" value="[Hold her hand!]" align="center" width="4" position="0 0 -0.5" rotation="-45 0 0"></a-text>
-        <a-text font="kelsonsans" value="[Kiss Her]" align="center" width="4" position="0 0 2" rotation="-45 0 0"></a-text>
+        <!-- load video-->
+        <a-video src="#movie" width="16" height="9" position="0 -3 -20" rotation="-15 0 0"></a-video>
+        
+        
 
         <a-obj-model src="#love-obj"  scale="0.1 0.1 0.1" position="1 1 -1">
             <a-animation attribute="rotation"
@@ -63,6 +58,8 @@
         <a-obj-model src="#love-obj" mtl="#love-mtl" scale="0.1 0.1 0.1" position="-2 2 -2"></a-obj-model>
         <a-obj-model src="#love-obj" mtl="#love-mtl" scale="0.1 0.1 0.1" position="-2 -0.5 -2"></a-obj-model>
         <a-obj-model src="#love-obj" mtl="#love-mtl" scale="0.1 0.1 0.1" position="1 -0.2 -2.5"></a-obj-model>
+        
+        <a-entity></a-entity>
       
         
       

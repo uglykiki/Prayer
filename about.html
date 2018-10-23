@@ -46,7 +46,7 @@
         </a-entity>
         
         <!-- add background music-->
-        <a-sound src="#bgsound" autoplay="true" position="0 0 15" loop="true"></a-sound>
+        <a-sound src="#bgsound" autoplay="true" position="0 0 5" loop="true"></a-sound>
         
         <!-- add back button-->
         <a-entity id="back"
@@ -54,8 +54,9 @@
             geometry="primitive: octahedron; height:0.6; width:0.6;"
             position="0 0 3.5"
             rotation="0 0 0"
-            material="shader:flat; src: assets/back-texture.jpg; repeat: 4 2">
-            <a-animation attribute="rotation" dur="3000" begin="mouseenter" to="0 360 0" repeat="indefinite"></a-animation>
+            material="shader:flat; src: assets/back-texture.jpg; repeat: 4 2"
+            sound="on: mouseenter; src: assets/sound/entry.wav">
+            <a-animation attribute="rotation" dur="2000" begin="mouseenter" to="0 360 0"></a-animation>
             
         </a-entity>
         <a-entity 
