@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.aframe.io/fonts/Roboto-msdf.json"></script>
-    <title>VR-space</title>
+    <title>VR-space-about</title>
     <!-- Hotjar Tracking Code for https://uglykiki.github.io/vrspace/ -->
    <script>
         (function(h,o,t,j,a,r){
@@ -45,49 +45,47 @@
         </a-cursor>
         </a-entity>
         
+        <!-- add background music-->
+        <a-sound src="#bgsound" autoplay="true" position="0 0 15" loop="true"></a-sound>
         
-        <!--- add Back link--->
-        <a-entity 
-            class="clickable"
-            visible="false"
-            link="on: click; href: index.html; title: Back to Main Scene; image: #homeThumbnail"
-            position="0 0 2.5">
-        </a-entity>
-        
-         <a-entity 
+        <!-- add back button-->
+        <a-entity id="back"
             class="clickable"
             geometry="primitive: octahedron; height:0.6; width:0.6;"
             position="0 0 3.5"
             rotation="0 0 0"
             material="shader:flat; src: assets/back-texture.jpg; repeat: 4 2">
-            <a-animation attribute="rotation" dur="3000" to="0 360 0" repeat="indefinite"></a-animation>
+            <a-animation attribute="rotation" dur="3000" begin="mouseenter" to="0 360 0" repeat="indefinite"></a-animation>
+            
         </a-entity>
-        
         <a-entity 
             text-geometry="value: Back; size: 0.2; font: roboto "
             position="0 1 2"
             rotation="-60 180 0"
             material="shader:flat; src: assets/back-texture.jpg; repeat: 4 2">
-            </a-entity>
+        </a-entity>
         
         
-        
-        <a-text 
+        <a-text id="aframe"
+        class="clickable"
         value="Web VR: A-Frame"
         align="center"
         font="roboto"
         position="0 1.2 -2"
         width="2.5">
         </a-text>
-      
-        <a-text 
+        
+        <a-text id="freesound"
+        class="clickable"
         value="Sound Library: freesound.org"
         align="center"
         font="roboto"
         position="0 0.9 -2"
         width="2.5">
         </a-text>
-        <a-text 
+        
+        <a-text id="streetview"
+        class="clickable"
         value="Panorama Images: Google Street View"
         position="0 0.6 -2"
         font="roboto"
@@ -110,8 +108,14 @@
             particle-system="preset: rain">
         </a-entity>
         
-        
-        
-   </a-scene>
+    </a-scene>
+    <script>
+        var back = document.querySelector ( '#back');
+        back.addEventListener ( "click", function( )
+        {
+        window.location.href = 'index.html';
+        })
+    </script>
 
 </body>
+</html>

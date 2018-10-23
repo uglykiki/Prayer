@@ -8,10 +8,10 @@
     <script src="js/aframe-v0.8.2.min.js"></script>
     <script src="js/aframe-effects.min.js"></script>
     <script src="js/aframe-particle-system-component.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+    <script src="http://cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
     <title>VR-space</title>
     <!-- Hotjar Tracking Code for https://uglykiki.github.io/vrspace/ -->
-   <script>
+    <script>
         (function(h,o,t,j,a,r){
             h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
             h._hjSettings={hjid:1060760,hjsv:6};
@@ -39,7 +39,7 @@
       
         <!-- add light-->
         <a-entity light="type: directional; color: red; intensity: 0.8" position="0 -3 3"></a-entity>
-        <a-entity light="type: directional; color: white; intensity: 1" position="0 -3 20"></a-entity>
+        <a-entity light="type: directional; color: white; intensity: 0.8" position="0 -3 20"></a-entity>
         
         <!-- add Cursor-->
         <a-entity camera look-controls>
@@ -50,24 +50,9 @@
         </a-cursor>
         </a-entity>
         
-        <!-- add soundtrack-->
+        <!-- add background music-->
         <a-sound src="#bgsound" autoplay="true" position="0 0 3" loop="true"></a-sound>
-<!--
-        <a-curvedimage 
-            src="assets/charm-2.png"
-            height="40.0"
-            visible="false"
-            radius="35"
-            theta-length="360"
-            rotation="0 0 0"
-            position="0 0 0"
-            scale="0.1 0.1 0.1"
-            material="opacity:0.4">
-            <a-animation attribute="visible" to="true" repeat="indefinite"></a-animation>
-            <a-animation attribute="rotation" dur="3000" to="0 360 0" begin="click"></a-animation>
-        </a-curvedimage>
         
--->
          <!-- add 3D Model use asset manager-->
         <a-obj-model
             id="hand"
@@ -76,45 +61,39 @@
             scale="2.2 2.2 2.2"
             position="-3 -6 -6"
             rotation="0 0 0"
-            material="src: #hand-texture; flat: shader; ; repeat: 2 2"
+            material="src: #hand-texture; flat: shader; ; repeat: 2 2; opacity: 0"
             sound="on: click; src: assets/sound/flame.wav; loop: true; volume: 6">
-            <a-animation attribute="rotation" dur="3000" to="25 0 0"  begin="click" repeat="indefinite"></a-animation>
+            <a-animation attribute="material.opacity" begin="6000" to="1"></a-animation>
+            <a-animation attribute="position" begin="6000" from="-3 -10 -6" to="-3 -6 -6"></a-animation>
+            <a-animation attribute="rotation" dur="2000" begin="click" to="20 0 0" repeat="indefinite"></a-animation>
         </a-obj-model>
         
          <!--- add leave link--->
         <a-entity 
+            id="leftLeave"
             class="clickable"
-            link="on: click; href: about.html"
-            visible="false"
-            position="-5 1 -6">
+            geometry="primitive: plane; height:8; width:3;"
+            rotation="0 0 0"
+            material="color: white"
+            position="-9 0 -10">
         </a-entity>
         <a-entity 
+            id="rightLeave"
             class="clickable"
-            link="on: click; href: about.html"
-            visible="false"
-            position="5 1 -6">
+            geometry="primitive: plane; height:8; width:3;"
+            rotation="0 0 0"
+            material="color: white"
+            position="9.5 0 -10">
         </a-entity>
-        
-        <!--- add backdoor alert--->
-        <a-entity
-            class="clickable"
-            geometry="primitive: box; height: 4; width: 8"
-            visible="false"
-            position="0 9 -20"
-            sound="on: click; src: assets/sound/leave.mp3; volume: 5">
+        <a-entity 
+            geometry="primitive: plane; height:10; width:5;"
+            rotation="0 0 0"
+            material="color: white"
+            position="0.5 0 -12">
         </a-entity>
+      
         
-<!--
-        <a-entity link="on: click; href: theater.html; title:Fontune of Romance; image: assets/golden-texture.jpg"
-        position="-4 -4 5.5"
-        rotation="65 0 0"></a-entity>
-        <a-entity link="on: click; href: theater.html; title:Fontune of Wealth" 
-        position="0 -4 5.5"
-        rotation="65 0 0"></a-entity>
-        <a-entity link="on: click; href: theater.html; title:Fontune of Well-being" 
-        position="4 -4 5.5"
-        rotation="65 0 0"></a-entity>
--->
+                
         <!--- add octahadron--->
         <a-entity id="leftBox"
             visible="false"
@@ -124,9 +103,11 @@
             position="-3 0 8"
             material="shader:flat; src: assets/love-texture.jpg; repeat: 4 2">
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+            <a-animation attribute="rotation" dur="3000" begin="mouseenter" to="0 0 0" easing="ease-in-out"></a-animation>
         </a-entity>
         
-        <a-entity id="centerBox"
+        <a-entity 
+            id="rightBox"
             visible="false"
             class="clickable"
             geometry="primitive: octahedron; height:1; width:1;"
@@ -134,21 +115,23 @@
             rotation="0 0 0"
             material="shader:flat; src: assets/money-texture.jpg; repeat: 4 2">
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+            <a-animation attribute="rotation" dur="3000" begin="mouseenter" to="0 0 0" easing="ease-in-out"></a-animation>
         </a-entity>
         
-        <a-entity id="rightBox"
+        <a-entity id="centerBox"
             class="clickable"
+            href="https://github.com/gasolin/aframe-href-component"
             visible="false"
             geometry="primitive: octahedron; height:1; width:1;"
             position="0 3 8"
             rotation="0 0 0"
             material="shader:flat; src: assets/life-texture.jpg; repeat: 4 2">
-            
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
+            <a-animation attribute="rotation" dur="3000" begin="mouseenter" to="0 0 0" easing="ease-in-out"></a-animation>
         </a-entity>
         
         
-        <!--- add fire--->
+        <!--- add censer fire--->
         <a-entity id="fire"
             position="0 -2 15"
             visible="false"
@@ -185,7 +168,8 @@
 
     </a-scene>
     
-    <script>
+    <script>     
+    //onject-interaction
     var hand = document.querySelector ( '#hand');
     var fire = document.querySelector ( '#fire');
     var censer = document.querySelector ( '#censer');
@@ -193,6 +177,8 @@
     var centerBox = document.querySelector ( '#centerBox');
     var leftBox = document.querySelector ( '#leftBox');
     var snow = document.querySelector ( '#snow');
+    var rightLeave = document.querySelector ( '#rightLeave');
+    var lefeLeave = document.querySelector ( '#leftLeave');
    
     hand.addEventListener ( "click", function( )
     {
@@ -208,12 +194,20 @@
         centerBox.setAttribute ( "visible",{ visibility: true})
     })
         
-   
+    centerBox.addEventListener ( "click", function( )
+    {
+       window.location.href = 'theater.html';
+    })
     
+    rightLeave.addEventListener ( "click", function( )
+    {
+       window.location.href = 'about.html';
+    })
     
-    //aframe-effect
-    require('aframe-effects')
-
+    leftLeave.addEventListener ( "click", function( )
+    {
+       window.location.href = 'about.html';
+    })
     </script>
     
 </body>

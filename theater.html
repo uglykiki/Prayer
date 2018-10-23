@@ -3,44 +3,53 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
-    <script src="https://rawgit.com/mayognaise/aframe-video-shader/master/dist/aframe-vid-shader.min.js"></script> 
-    <title>Love Movie</title>
+    <meta name="author" content="UGLYKIKI">
+    <meta property="og:image" content="assets/vr-screenshot2.png">
+    <script src="js/aframe-v0.8.2.min.js"></script>
+    <title>VR-space-theater</title>
+    <!-- Hotjar Tracking Code for https://uglykiki.github.io/vrspace/ -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1060760,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
 </head>
 
+
 <body>
-    <nav>
-    <a href="index.html">HOME</a>
-    <a href="">ABOUT</a>
-    </nav>
-    
-    
     <a-scene>
-        <a-sky src="assets/theater-color.jpg" rotation="0 -90 5" ></a-sky>
-        
-        <!-- load video-->
+        <!-- Using the asset management system. -->
         <a-assets>
             <video id="movie" autoplay loop="true" src="assets/moderat.mp4"></video>
+            <a-asset-item id="love-obj" src="assets/model/redlove.obj" ></a-asset-item>
+            <img id="sky" src="assets/theater-color.jpg">
         </a-assets>
-        <!-- Using the asset management system. -->
+        <a-sky src="#sky" rotation="0 -90 5" ></a-sky>
+        
+        <!-- load video-->
         <a-video src="#movie" width="16" height="9" position="0 -3 -20" rotation="-15 0 0"></a-video>
         <a-video src="assets/moderat.mp4"></a-video>
-
-
         
+        <!-- add cursor-->
+        <a-entity camera look-controls>
+        <a-cursor id="cursor" position="0 0 -1" color="white" raycaster="objects: .clickable">
+            <a-animation begin="mouseenter" attribute="color" dur="50" from="white" to="springgreen"></a-animation>
+            <a-animation begin="mouseleave" attribute="color" dur="50" from="springgreen" to="white" ></a-animation>
+            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="50"></a-animation>
+        </a-cursor>
+        </a-entity>
+
         
         <a-text font="kelsonsans" value="[Run away like a jerk]" align="center" width="2" position="-4 1 -0.5" rotation="0 80 -5"></a-text>
         <a-text font="kelsonsans" value="[Run away like a jerk]" align="center" width="2" position="4 1 -0.5" rotation="0 -80 0"></a-text>
         <a-text font="kelsonsans" value="[Hold her hand!]" align="center" width="4" position="0 0 -0.5" rotation="-45 0 0"></a-text>
         <a-text font="kelsonsans" value="[Kiss Her]" align="center" width="4" position="0 0 2" rotation="-45 0 0"></a-text>
-        
-        
-        <a-assets>
-        <a-asset-item id="love-obj" src="assets/redlove.obj" ></a-asset-item>
-        <a-asset-item id="love-mtl" src="assets/redlove.mtl"></a-asset-item>
-        </a-assets>
+
         <a-obj-model src="#love-obj"  scale="0.1 0.1 0.1" position="1 1 -1">
             <a-animation attribute="rotation"
                dur="3000"
@@ -55,20 +64,6 @@
         <a-obj-model src="#love-obj" mtl="#love-mtl" scale="0.1 0.1 0.1" position="-2 -0.5 -2"></a-obj-model>
         <a-obj-model src="#love-obj" mtl="#love-mtl" scale="0.1 0.1 0.1" position="1 -0.2 -2.5"></a-obj-model>
       
-        
-<!--
-        <a-entity 
-        geometry="primitive:plane;"
-        scale="1.5 1 0.5"
-        position="0 1.2 -2"
-        rotation="-15 -5 0"
-        material="shader:video; src:url(assets/moderat.mp4);" 
-        autoplay ="true"
-        >
-        </a-entity>
--->
-        
-
         
       
   </a-scene>
