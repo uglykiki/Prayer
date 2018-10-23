@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <meta name="author" content="UGLYKIKI">
+    <meta property="og:image" content="assets/vr-screenshot2.png">
     <script src="js/aframe-v0.8.2.min.js"></script>
     <script src="js/aframe-effects.min.js"></script>
     <script src="js/aframe-particle-system-component.min.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
     <title>VR-space</title>
     <!-- Hotjar Tracking Code for https://uglykiki.github.io/vrspace/ -->
-    <script>
+   <script>
         (function(h,o,t,j,a,r){
             h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
             h._hjSettings={hjid:1060760,hjsv:6};
@@ -21,8 +22,6 @@
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
 </head>
-
-
 
 <body>
     <a-scene effects="bloom, fxaa" bloom="radius: 0.5" fxaa>
@@ -45,8 +44,8 @@
         <!-- add Cursor-->
         <a-entity camera look-controls>
         <a-cursor id="cursor" position="0 0 -1" color="white" raycaster="objects: .clickable">
-            <a-animation begin="mouseenter" attribute="color" from="white" to="springgreen" dur="50"></a-animation>
-            <a-animation begin="mouseleave" attribute="color" from="springgreen" to="white" ></a-animation>
+            <a-animation begin="mouseenter" attribute="color" dur="50" from="white" to="springgreen"></a-animation>
+            <a-animation begin="mouseleave" attribute="color" dur="50" from="springgreen" to="white" ></a-animation>
             <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="50"></a-animation>
         </a-cursor>
         </a-entity>
@@ -85,13 +84,13 @@
          <!--- add leave link--->
         <a-entity 
             class="clickable"
-            link="on: click; href: https://aframe-aincraft.glitch.me"
+            link="on: click; href: about.html"
             visible="false"
             position="-5 1 -6">
         </a-entity>
         <a-entity 
             class="clickable"
-            link="on: click; href: https://aframe-aincraft.glitch.me"
+            link="on: click; href: about.html"
             visible="false"
             position="5 1 -6">
         </a-entity>
@@ -142,8 +141,9 @@
             visible="false"
             geometry="primitive: octahedron; height:1; width:1;"
             position="0 3 8"
-            rotation="0 0 0 "
+            rotation="0 0 0"
             material="shader:flat; src: assets/life-texture.jpg; repeat: 4 2">
+            
             <a-animation attribute="rotation" dur="3000" to="360 360 360" repeat="indefinite"></a-animation>
         </a-entity>
         
@@ -207,6 +207,9 @@
         leftBox.setAttribute ( "visible",{ visibility: true});
         centerBox.setAttribute ( "visible",{ visibility: true})
     })
+        
+   
+    
     
     //aframe-effect
     require('aframe-effects')
