@@ -1,8 +1,9 @@
 # About This Porject
 - Title: VR space
+- Year: 2018
 - Media: Website, mobile phone, WebVR
 - Dimension: Website 1280px * 600px
-- Year: 2018
+
 
 This project uses [A-Frame](http://aframe.io) to create a WebVR space.
 
